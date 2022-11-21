@@ -58,7 +58,7 @@ res.status(200).json(updatedProduct);
             }
             
         });
-        // get all user
+        // get all products
         router.get("/", verifyTokenAndAdmin, async (req,res)=>{
            const qNew = req.query.new;
            const qCategory = req.query.category;

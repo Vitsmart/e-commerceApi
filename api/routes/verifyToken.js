@@ -8,7 +8,7 @@ const verifyToken = (req,res,next)=>{
             if (err) res.status(401).json("Token is not valid!");
         req.user = user;
         next();
-        })
+        });
     }else {
         return res.status(401).json("You are not authenticated!");
     }
@@ -16,7 +16,7 @@ const verifyToken = (req,res,next)=>{
 const verifyTokenAndAuthorization = (req,res,next)=>{
     verifyToken(req,res,() => {
         if(req.user.id === req.params.id || req.user.isAdmin){
-            next()
+            next();
         } else{
             res.status(403).json("You are not allowed!")
         }
