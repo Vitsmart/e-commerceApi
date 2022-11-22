@@ -34,7 +34,7 @@ res.status(200).json(updatedUser);
             }
         });
         // get user
-        router.get("/find/:id", verifyTokenAndAdmin, async (req,res)=>{
+        router.get("/find/:id", async (req,res)=>{
             try{
          const user = await User.findById(req.params.id);
          const { password, ...others } = user._doc; 
@@ -45,7 +45,7 @@ res.status(200).json(updatedUser);
             }
         });
         // get all user
-        router.get("/", verifyTokenAndAdmin, async (req,res)=>{
+        router.get("/",  async (req,res)=>{
            const query = req.query.new
             try{
          const users =  query ? await User.find().sort({ _id: -1 }).limit(5) : await User.find();
@@ -57,7 +57,7 @@ res.status(200).json(updatedUser);
         });
 
         // GET USER STATS
-        router.get("/stats", verifyTokenAndAdmin, async (req,res)=>{
+        router.get("/stats",  async (req,res)=>{
             const date = new Date();
             const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
         

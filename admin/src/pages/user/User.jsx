@@ -22,13 +22,13 @@ export default function User() {
         <div className="userShow">
           <div className="userShowTop">
             <img
-              src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src="../images/userimg2.png"
               alt=""
               className="userShowImg"
             />
             <div className="userShowTopTitle">
               <span className="userShowUsername">Anna Becker</span>
-              <span className="userShowUserTitle">Software Engineer</span>
+              <span className="userShowUserTitle">Software guru</span>
             </div>
           </div>
           <div className="userShowBottom">

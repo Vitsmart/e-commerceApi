@@ -47,7 +47,7 @@ res.status(200).json(updatedProduct);
             }
         });
         // GET Products
-        router.get("/find/:id", verifyTokenAndAdmin, async (req,res)=>{
+        router.get("/find/:id", async (req,res)=>{
             try{
          const product = await Product.findById(req.params.id);
          const { password, ...others } = product._doc; 
@@ -59,7 +59,7 @@ res.status(200).json(updatedProduct);
             
         });
         // get all products
-        router.get("/", verifyTokenAndAdmin, async (req,res)=>{
+        router.get("/",  async (req,res)=>{
            const qNew = req.query.new;
            const qCategory = req.query.category;
             try{

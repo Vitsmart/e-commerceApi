@@ -1,19 +1,29 @@
 import "./productList.css";
-//import { Grid } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
 //import  DeleteIcon  from "@mui/icons-material/Delete";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../components/redux/apiCalls";
+
 
 export default function ProductList() {
   const [data, setData] = useState(productRows);
+  const dispatch = useDispatch();
+const products = useSelector((state) => state.product.products);
+
+
+useEffect(() => {
+  getProducts(dispatch);
+},[dispatch]);
 
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 220 },
     {
       field: "product",
       headerName: "Product",
@@ -22,17 +32,13 @@ export default function ProductList() {
         return (
           <div className="productListItem">
             <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.name}
+            {params.row.title}
           </div>
         );
       },
     },
-    { field: "stock", headerName: "Stock", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
+    { field: "instock", headerName: "Stock", width: 200 },
+    
     {
       field: "price",
       headerName: "Price",
@@ -60,14 +66,16 @@ export default function ProductList() {
 
   return (
     <div className="productList">
-      {/* <Grid
-        rows={data}
+      {<DataGrid
+        rows={products}
         disableSelectionOnClick
         columns={columns}
+        getRowId={(row) => row._id}
         pageSize={8}
         checkboxSelection
-      /> */}
-      Grid={columns}
+        />
+      }
+      
     </div>
   );
 }

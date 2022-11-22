@@ -1,6 +1,5 @@
 import "./userList.css";
-//import { Grid } from '@mui/material';
-
+import { DataGrid } from '@mui/x-data-grid';
 import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -13,7 +12,7 @@ export default function UserList() {
   };
   
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 90 },
     {
       field: "user",
       headerName: "User",
@@ -60,13 +59,14 @@ export default function UserList() {
 
   return (
     <div className="userList">
-      {/* <Grid
+      { <DataGrid
         rows={data}
         disableSelectionOnClick
         columns={columns}
+        getRowId={(row) => row._id}
         pageSize={8}
         checkboxSelection
-      /> */}
+      /> }
       {columns}
     </div>
   );

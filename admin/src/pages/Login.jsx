@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { Redirect} from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { loginFailure, loginStart, loginSuccess} from "../components/redux/userRedux"
@@ -79,7 +80,8 @@ dispatch(loginSuccess(res.data));
 
 const handleLogin = (e)=>{
 e.preventDefault()
-login(dispatch, { username, password })
+login(dispatch, { username, password });
+Redirect("/") ;
 }
 
 return (

@@ -5,7 +5,7 @@ const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = requir
 const router = require("express").Router();
 
          // CREATE
-         router.post("/", verifyToken, async (req,res)=>{
+         router.post("/", async (req,res)=>{
             const newOrder = new Order(req.body)
          
             try{
@@ -47,7 +47,7 @@ res.status(200).json(updatedOrder);
             }
         });
         // GET user orders
-        router.get("/find/:userId", verifyTokenAndAuthorization, async (req,res)=>{
+        router.get("/find/:userId",  async (req,res)=>{
             try{
          const orders = await Order.find({userId: req.params.userId});
          
@@ -58,7 +58,7 @@ res.status(200).json(updatedOrder);
             }
         });
         // get all 
-        router.get("/", verifyTokenAndAdmin, async (req,res)=>{
+        router.get("/",  async (req,res)=>{
            try{
 const orders = await Order.find();
 res.status(200).json(orders)
@@ -68,7 +68,7 @@ res.status(200).json(orders)
         })       
 
         // GET MONTHLY INCOME
-router.get("/income", verifyTokenAndAdmin, async (req,res)=>{
+router.get("/income",  async (req,res)=>{
     const date = new Date();
     const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
     const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
