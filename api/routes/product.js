@@ -5,7 +5,7 @@ const { verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } = requir
 const router = require("express").Router();
 
          // CREATE
-         router.post("/", verifyTokenAndAdmin, async (req,res)=>{
+         router.post("/", async (req,res)=>{
             const newProduct = new Product(req.body)
          
             try{
@@ -20,7 +20,7 @@ const router = require("express").Router();
 
 
                         // Update
-router.put("/:id", verifyTokenAndAdmin, async (req, res)=> {
+router.put("/:id",  async (req, res)=> {
     
     try{
         const updatedProduct = await Product.findByIdAndUpdate(
@@ -82,7 +82,7 @@ res.status(200).json(products)
         });
 
         // GET USER STATS
-        router.get("/stats", verifyTokenAndAdmin, async (req,res)=>{
+        router.get("/stats",  async (req,res)=>{
             const date = new Date();
             const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
         

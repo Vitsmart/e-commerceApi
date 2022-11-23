@@ -3,13 +3,13 @@ import { DataGrid } from '@mui/x-data-grid';
 //import  DeleteIcon  from "@mui/icons-material/Delete";
 import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../components/redux/apiCalls";
+import { deleteProduct, getProducts } from "../../components/redux/apiCalls";
 
 
 export default function ProductList() {
-  const [data, setData] = useState(productRows);
+  //const [data, setData] = useState(productRows);
   const dispatch = useDispatch();
 const products = useSelector((state) => state.product.products);
 
@@ -18,10 +18,13 @@ useEffect(() => {
   getProducts(dispatch);
 },[dispatch]);
 
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
-  };
+  // const handleDelete = (id) => {
+  //   setData(data.filter((item) => item.id !== id));
+  // };
 
+  const handleDelete = (id) => {
+    deleteProduct(id, dispatch);
+  }
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
     {
@@ -37,7 +40,7 @@ useEffect(() => {
         );
       },
     },
-    { field: "instock", headerName: "Stock", width: 200 },
+    { field: "inStock", headerName: "Stock", width: 200 },
     
     {
       field: "price",
@@ -51,12 +54,12 @@ useEffect(() => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row.id}>
+            <Link to={"/product/" + params.row._id}>
               <button className="productListEdit">Edit</button>
             </Link>
             <ion-icon name="trash-outline"
               className="productListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
               ></ion-icon>
           </>
         );
@@ -65,6 +68,8 @@ useEffect(() => {
   ];
 
   return (
+    <>
+    
     <div className="productList">
       {<DataGrid
         rows={products}
@@ -77,5 +82,9 @@ useEffect(() => {
       }
       
     </div>
+    <Link className="link" to="/newproduct">
+    <button className="productAddButton">Create</button>
+  </Link>
+    </>
   );
 }

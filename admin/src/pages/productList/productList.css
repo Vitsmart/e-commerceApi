@@ -1,7 +1,23 @@
 .productList{
     flex: 4;
 }
-
+.productAddButton {
+    
+    border: none;
+    padding: 10px 20px;
+    background-color: rgb(93, 179, 71);
+    color: white;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .link{
+    text-decoration: none;
+  }
 .productListItem{
     display: flex;
     align-items: center;

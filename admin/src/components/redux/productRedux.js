@@ -37,8 +37,50 @@ getProductFailure: (state) => {
         state.isFetching = false;
         state.error = true;
     },
+    // UPDATE
+    updateProductStart: (state) => {
+        state.isFetching = true;
+        state.error = false;
+    },
+    updateProductSuccess: (state, action) => {
+        state.isFetching = false;
+        state.products[
+            state.products.findIndex((item) => item._id === action.payload.id)
+        ] = action.payload.user;
+    },
+    updateProductFailure: (state) => {
+        state.isFetching = false;
+        state.error = true;
+    },
+    // ADDING NEW PRODUCT
+    addProductStart: (state) => {
+        state.isFetching = true;
+        state.error = false;
+    },
+    addProductSuccess: (state, action) => {
+        state.isFetching = false;
+        state.products.push(action.payload)
+        
+    },
+    addProductFailure: (state) => {
+        state.isFetching = false;
+        state.error = true;
+    },
 });
-export const {getProductFailure, getProductStart, getProductSuccess, deleteProductFailure, deleteProductStart, deleteProductSuccess} = productSlice.actions;
+export const {
+    getProductFailure, 
+    getProductStart, 
+    getProductSuccess, 
+    deleteProductFailure, 
+    addProductFailure,
+    addProductStart,
+    addProductSuccess,
+    updateProductFailure,
+    updateProductStart,
+    updateProductSuccess,
+    deleteProductStart, 
+    deleteProductSuccess
+} = productSlice.actions;
 
 export default productSlice.reducer;
 
